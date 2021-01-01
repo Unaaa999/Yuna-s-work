@@ -1,7 +1,6 @@
 
 #1. Read in training dataset, understand its distribution, columns, and missing value 
 
-
 setwd("E:\\Kaggle\\1. Titanic")
 train<-read.csv("train.csv", header=TRUE)
 # always a good practice to cast all "" to NA
@@ -128,8 +127,8 @@ skewness(train3$Age)
 
 # Fit a Gamma model first 
 lm6 <- glm(formula = Age ~ Pclass+SibSp+title,
-                         family  = Gamma(link = "log"),
-                         data    = train2)
+           family  = Gamma(link = "log"),
+           data    = train2)
 summary(lm6)
 train2$new_Age<-predict(lm6, newdata=train2,type="response")
 summary(train2$new_Age)
@@ -211,7 +210,7 @@ library(Hmisc)
 
 
 impute_arg <- aregImpute(~ Age ,
-                            data = train2, n.impute = 5)
+                         data = train2, n.impute = 5)
 
 
 
@@ -219,21 +218,5 @@ impute_arg <- aregImpute(~ Age ,
 
 
 
-
-
-
-
-library(ggplot2)
-ggplot(train, aes(x=Age)) + geom_histogram(binwidth=1)
-
-
-
-
-
-#Correlation map
-head(train)
-library(corrplot)
-M<-cor(train)
-cormat<-round(cor(train),2)
 
 
